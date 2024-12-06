@@ -4,6 +4,7 @@ using AdventOfCode2024.Task01;
 using AdventOfCode2024.Task02;
 using AdventOfCode2024.Task03;
 using AdventOfCode2024.Task04;
+using AdventOfCode2024.Task05;
 
 var dateTimeStart = DateTime.Now;
 var dateTimeLast = dateTimeStart;
@@ -44,7 +45,17 @@ var dateTimeLast = dateTimeStart;
 //dateTimeLast = DateTime.Now;
 
 //// Task 4-2
-Console.WriteLine("Task 4-2: " + Task04.Star2());
+//Console.WriteLine("Task 4-2: " + Task04.Star2());
+//Console.WriteLine("completed in " + (DateTime.Now - dateTimeLast).TotalMilliseconds + "ms");
+//dateTimeLast = DateTime.Now;
+
+//// Task 5-1
+//Console.WriteLine("Task 5-1: " + Task05.Star1());
+//Console.WriteLine("completed in " + (DateTime.Now - dateTimeLast).TotalMilliseconds + "ms");
+//dateTimeLast = DateTime.Now;
+
+//// Task 5-2
+Console.WriteLine("Task 5-2: " + Task05.Star2());
 Console.WriteLine("completed in " + (DateTime.Now - dateTimeLast).TotalMilliseconds + "ms");
 dateTimeLast = DateTime.Now;
 
