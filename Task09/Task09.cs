@@ -28,6 +28,14 @@ namespace AdventOfCode2024.Task09
 
                 List<int> output = new List<int>();
 
+                // COntrol mechanism
+                long ctrlSum = 0;
+                for (int i = 0; i < chars.Length; i++)
+                {
+                    var currNum = (int)char.GetNumericValue(chars[i]);
+                    if (i % 2 == 0) ctrlSum += currNum;
+                }
+
                 int beginning = 0;
                 int end = line.Length - 1;
                 int beginningNumber = 0;
@@ -40,17 +48,24 @@ namespace AdventOfCode2024.Task09
                 {
                     // Add beginning
                     int n = (int)char.GetNumericValue(chars[beginning]);
-                    int spaces = (int)char.GetNumericValue(chars[beginning + 1]);
+
                     for (int i = 0; i < n; i++)
                     {
                         output.Add(beginningNumber);
                         sum += (long)beginningNumber * (output.Count - 1);
+
+                        if (output.Count == ctrlSum)
+                            goto thisistheend;
                     }
 
 
                     // Check if there is anything else left in the end, if not, break
+                    string meho = "";
                     if (beginning >= end)
-                        break;
+                        meho += "hjksh";
+
+
+                    int spaces = (int)char.GetNumericValue(chars[beginning + 1]);
 
 
                     // Add end
@@ -61,22 +76,29 @@ namespace AdventOfCode2024.Task09
                         {
                             for (int i = 0; i < nLast; i++)
                             {
-                                output.Add(endNumber);
+                                output.Add(-1 * endNumber);
                                 sum += (long)endNumber * (output.Count - 1);
+
+                                if (output.Count == ctrlSum)
+                                    goto thisistheend;
                                 spaces--;
                             }
 
                             end = end - 2;
                             endNumber--;
 
-                            if (nLast == spaces) break; // break the inner while loop
+                            // if (nLast == spaces) break; // break the inner while loop
                         }
                         else
                         {
                             for (int i = 0; i < spaces; i++)
                             {
-                                output.Add(endNumber);
+                                output.Add(-1 * endNumber);
                                 sum += (long)endNumber * (output.Count - 1);
+
+                                if (output.Count == ctrlSum)
+                                    goto thisistheend;
+
                             }
                             chars[end] = (char)(((int)char.GetNumericValue(chars[end]) - spaces) + '0');
                             break;
@@ -87,11 +109,64 @@ namespace AdventOfCode2024.Task09
 
                     beginning += 2;
                     beginningNumber++;
+
+
                 }
+
+thisistheend:
                 Console.WriteLine(string.Join(",", output));
             }
 
 
+
+
+            return sum;
+        }
+
+        public static long Star2()
+        {
+            long sum = 0;
+            var filename = AocConstants.APP_FOLDER + "Task09\\Example.txt";
+            const int BufferSize = 512;
+
+
+            using (var fileStream = File.OpenRead(filename))
+            using (var streamReader = new StreamReader(fileStream, Encoding.UTF8, true, BufferSize))
+            {
+
+                // Reading data
+                string line = streamReader.ReadLine();
+                int[] digits = line.Select(c => int.Parse(c.ToString())).ToArray();
+                int beginningNumber = 0;
+                int beginning = 0;
+                int end = digits.Length - 1;
+                int endNumber = digits.Length / 2;
+                List<int> output = new();
+
+
+                // Custom comparer for descending order
+                var comparer = Comparer<int>.Create((x, y) => y.CompareTo(x));
+                // Dictionary will have number of spaces as a key and list of indexes as a value
+                SortedDictionary<int, SortedSet<int>> spaces = new(comparer);
+                int index = 0;
+                for (int i = 0; i < digits.Length; i++)
+                {
+
+                    // if the number is odd, then create spaces in the dictionary
+                    if (i % 2 != 0)
+                    {
+                        if (!spaces.ContainsKey(digits[i]))
+                            spaces[digits[i]] = new SortedSet<int>();
+                        spaces[digits[i]].Add(index);
+                    }
+                    // increase the index by the amount of chars
+                    index += digits[i];
+
+                }
+
+
+                
+            }
 
 
             return sum;

@@ -9,6 +9,7 @@ using AdventOfCode2024.Task06;
 using AdventOfCode2024.Task07;
 using AdventOfCode2024.Task08;
 using AdventOfCode2024.Task09;
+using AdventOfCode2024.Task10;
 
 var dateTimeStart = DateTime.Now;
 var dateTimeLast = dateTimeStart;
@@ -94,7 +95,17 @@ var dateTimeLast = dateTimeStart;
 //dateTimeLast = DateTime.Now;
 
 
-//// Task 9-1
-Console.WriteLine("Task 9-1: " + Task09.Star1());
+////// Task 9-1 - PROVJERITI UVJET.....
+//Console.WriteLine("Task 9-1: " + Task09.Star1());
+//Console.WriteLine("completed in " + (DateTime.Now - dateTimeLast).TotalMilliseconds + "ms");
+//dateTimeLast = DateTime.Now;
+
+////// Task 9-2
+Console.WriteLine("Task 9-2: " + Task09.Star2());
 Console.WriteLine("completed in " + (DateTime.Now - dateTimeLast).TotalMilliseconds + "ms");
 dateTimeLast = DateTime.Now;
+
+////// Task 10-1
+//Console.WriteLine("Task 10-1: " + Task10.Star1());
+//Console.WriteLine("completed in " + (DateTime.Now - dateTimeLast).TotalMilliseconds + "ms");
+//dateTimeLast = DateTime.Now;
